@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProArena Esports | BGMI & Free Fire Tournaments 2026</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0a1f;
+            --secondary: #151530;
+            --accent: #ff4655;
+            --accent-blue: #00e0ff;
+            --accent-purple: #9d4edd;
+            --success: #00ff88;
+            --danger: #ff4757;
+            --text: #ffffff;
+            --text-muted: #b0b0d0;
+            --border: #2a2a4a;
+            --card: #1a1a35;
+            --gradient: linear-gradient(135deg, #ff4655 0%, #9d4edd 50%, #00e0ff 100%);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 31, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent);
+            padding: 15px 0;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: rgba(255, 70, 85, 0.15);
+            color: var(--accent);
+        }
+
+        /* User Section */
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            background: rgba(255, 70, 85, 0.1);
+            border-radius: 50px;
+            border: 1px solid var(--border);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 70, 85, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        .btn-google {
+            background: white;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .btn-google:hover {
+            background: #f8f9fa;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-logout {
+            background: rgba(255, 71, 87, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 71, 87, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 80px;
+            text-align: center;
+            background: linear-gradient(rgba(10,10,31,0.9), rgba(10,10,31,0.9)),
+                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: var(--text-muted);
+        }
+
+        /* Tournaments */
+        .tournaments {
+            padding: 80px 0;
+            background: var(--secondary);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+        }
+
+        .tournament-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tournament-card {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .tournament-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+        }
+
+        .tournament-card h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .entry-fee {
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        /* Google Form Section */
+        .registration {
+            padding: 80px 0;
+            background: var(--primary);
+        }
+
+        .form-container {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 2px solid var(--border);
+        }
+
+        .form-container iframe {
+            width: 100%;
+            height: 1300px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Payment Section */
+        .payment {
+            padding: 80px 0;
+            background: var(--secondary);
+        }
+
+        .payment-box {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 40px;
+            border: 2px solid var(--border);
+            text-align: center;
+        }
+
+        .upi-id {
+            background: rgba(0, 224, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            border: 2px dashed var(--accent-blue);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: var(--primary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .contact-card h4 {
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: #050515;
+            padding: 60px 0 30px;
+            border-top: 2px solid var(--accent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        /* Messages */
+        .message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            z-index: 10000;
+            max-width: 300px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .message.success {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .message.error {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .user-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .form-container iframe {
+                height: 1000px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">??</div>
+                <div class="logo-text">PROARENA ESPORTS</div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#tournaments">Tournaments</a></li>
+                    <li><a href="#register">Register</a></li>
+                    <li><a href="#payment">Payment</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-section">
+                <div id="userInfo" style="display: none;">
+                    <div class="user-info">
+                        <img id="userAvatar" class="user-avatar" src="" alt="User Avatar">
+                        <span id="userName" class="user-name"></span>
+                    </div>
+                    <button id="logoutBtn" class="btn btn-logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+                <button id="loginBtn" class="btn btn-google">
+                    <i class="fab fa-google"></i> Sign in with Google
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>PRO ARENA ESPORTS 2026</h1>
+            <p>Join India's biggest BGMI & Free Fire tournaments. Compete with top players, showcase your skills, and win amazing prizes!</p>
+            <a href="#register" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Register Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Tournaments Section -->
+    <section class="tournaments" id="tournaments">
+        <div class="container">
+            <h2 class="section-title">OUR TOURNAMENTS</h2>
+            <div class="tournament-grid">
+                <div class="tournament-card">
+                    <span class="entry-fee">?200</span>
+                    <h3>BGMI TOURNAMENT</h3>
+                    <p><i class="fas fa-calendar"></i> <strong>Date:</strong> Coming Soon</p>
+                    <p><i class="fas fa-clock"></i> <strong>Time:</strong> 3:00 PM Onwards</p>
+                    <p><i class="fas fa-users"></i> <strong>Mode:</strong> Squad (4v4)</p>
+                    <p><i class="fas fa-map"></i> <strong>Type:</strong> Custom Rooms</p>
+                </div>
+                
+                <div class="tournament-card">
+                    <span class="entry-fee">?150</span>
+                    <h3>FREE FIRE TOURNAMENT</h3>
+                    <p><i class="fas fa-calendar"></i> <strong>Date:</strong> Coming Soon</p>
+                    <p><i class="fas fa-clock"></i> <strong>Time:</strong> 2:00 PM Onwards</p>
+                    <p><i class="fas fa-users"></i> <strong>Mode:</strong> Squad (4v4)</p>
+                    <p><i class="fas fa-map"></i> <strong>Type:</strong> Ranked Matches</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="registration" id="register">
+        <div class="container">
+            <h2 class="section-title">REGISTRATION FORM</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: var(--text-muted);">
+                Fill the Google Form below to register for the tournament.
+            </p>
+            
+            <div class="form-container">
+                <!-- Your Google Form -->
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSej8HMeykMnUAWZl3O6cAYJ-Xpl9fva7aKwACpREstlJHGrPQ/viewform?embedded=true" 
+                        width="100%" 
+                        height="1300" 
+                        frameborder="0" 
+                        marginheight="0" 
+                        marginwidth="0">
+                    Loading…
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section class="payment" id="payment">
+        <div class="container">
+            <h2 class="section-title">PAYMENT DETAILS</h2>
+            
+            <div class="payment-box">
+                <h3><i class="fas fa-rupee-sign"></i> Entry Fees</h3>
+                <p>BGMI Tournament: <strong style="color: var(--accent);">?200</strong></p>
+                <p>Free Fire Tournament: <strong style="color: var(--accent-blue);">?150</strong></p>
+                
+                <div style="margin: 30px 0;">
+                    <h4><i class="fas fa-mobile-alt"></i> Send Payment To:</h4>
+                    <div class="upi-id" id="upiIdDisplay">
+                        govindsawant1975-4@oksbi
+                    </div>
+                    <button class="btn btn-primary" onclick="copyUPI()" style="margin-top: 15px;">
+                        <i class="fas fa-copy"></i> Copy UPI ID
+                    </button>
+                </div>
+                
+                <div style="text-align: left; background: rgba(255, 70, 85, 0.1); padding: 20px; border-radius: 10px;">
+                    <h4><i class="fas fa-list-ol"></i> Payment Instructions:</h4>
+                    <ol style="margin-left: 20px; margin-top: 15px;">
+                        <li>Open your UPI app</li>
+                        <li>Send correct amount to above UPI ID</li>
+                        <li>Take screenshot of successful transaction</li>
+                        <li>WhatsApp screenshot to any contact number below</li>
+                        <li>Registration confirmed within 24 hours</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">CONTACT US</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h4>Shantaram Sawant</h4>
+                    <p>Tournament Organizer</p>
+                    <p><i class="fas fa-phone"></i> +91 9511843840</p>
+                    <p><i class="fas fa-envelope"></i> sawantbhagyesh98@gmail.com</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-user-headset"></i>
+                    <h4>Madhukar Kerkar</h4>
+                    <p>Support Manager</p>
+                    <p><i class="fas fa-phone"></i> +91 98817 33570</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-user-cog"></i>
+                    <h4>Shivraj Naik</h4>
+                    <p>Technical Support</p>
+                    <p><i class="fas fa-phone"></i> +91 83297 83023</p>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-question-circle"></i>
+                    <h4>Payment Help</h4>
+                    <p>Send payment screenshot to any contact</p>
+                    <p>UPI ID: govindsawant1975-4@oksbi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ProArena Esports</h4>
+                    <p>Konkan's premier esports tournament organizer.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/919511843840" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Tournament Info</h4>
+                    <p><i class="fas fa-gamepad"></i> BGMI: ?200 Entry</p>
+                    <p><i class="fas fa-gamepad"></i> Free Fire: ?150 Entry</p>
+                    <p><i class="fas fa-calendar-alt"></i> Dates: Coming Soon</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li><a href="#home" style="color: var(--text-muted); text-decoration: none;">Home</a></li>
+                        <li><a href="#tournaments" style="color: var(--text-muted); text-decoration: none;">Tournaments</a></li>
+                        <li><a href="#register" style="color: var(--text-muted); text-decoration: none;">Registration</a></li>
+                        <li><a href="#contact" style="color: var(--text-muted); text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 ProArena Esports. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase Configuration -->
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCjxCgZWsqnIEMaCSCu7ZJykpAFGnX0kFY",
+            authDomain: "esports-konkan.firebaseapp.com",
+            projectId: "esports-konkan",
+            storageBucket: "esports-konkan.firebasestorage.app",
+            messagingSenderId: "924344762740",
+            appId: "1:924344762740:web:11f8d5b158ee0dad096c21",
+            measurementId: "G-33LMR2QPYC",
+            databaseURL: "https://esports-konkan-default-rtdb.firebaseio.com/"
+        };
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+    <script>
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+        
+        // Global variables
+        let currentUser = null;
+        
+        // Initialize auth state listener
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // User is signed in
+                currentUser = user;
+                showUserInfo(user);
+            } else {
+                // User is signed out
+                currentUser = null;
+                showLoginButton();
+            }
+        });
+        
+        // Google Sign In
+        async function googleSignIn() {
+            try {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+                
+                // Save user to database
+                await database.ref('users/' + user.uid).set({
+                    email: user.email,
+                    name: user.displayName,
+                    photoURL: user.photoURL,
+                    lastLogin: new Date().toISOString()
+                });
+                
+                showMessage('Welcome ' + user.displayName + '!', 'success');
+                
+            } catch (error) {
+                console.error('Sign in error:', error);
+                showMessage('Sign in failed: ' + error.message, 'error');
+            }
+        }
+        
+        // Logout function
+        async function logout() {
+            try {
+                await auth.signOut();
+                showMessage('Logged out successfully', 'success');
+            } catch (error) {
+                console.error('Logout error:', error);
+                showMessage('Logout failed: ' + error.message, 'error');
+            }
+        }
+        
+        // Show user info when logged in
+        function showUserInfo(user) {
+            document.getElementById('userInfo').style.display = 'flex';
+            document.getElementById('loginBtn').style.display = 'none';
+            
+            document.getElementById('userName').textContent = user.displayName || user.email;
+            document.getElementById('userAvatar').src = user.photoURL || 
+                'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.displayName || user.email) + '&background=ff4655&color=fff';
+        }
+        
+        // Show login button when logged out
+        function showLoginButton() {
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('loginBtn').style.display = 'block';
+        }
+        
+        // Copy UPI ID
+        function copyUPI() {
+            const upiId = "govindsawant1975-4@oksbi";
+            navigator.clipboard.writeText(upiId).then(() => {
+                showMessage('UPI ID copied to clipboard!', 'success');
+            });
+        }
+        
+        // Show message
+        function showMessage(text, type) {
+            const message = document.createElement('div');
+            message.className = `message ${type}`;
+            message.textContent = text;
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.style.opacity = '0';
+                message.style.transform = 'translateX(100px)';
+                setTimeout(() => {
+                    document.body.removeChild(message);
+                }, 300);
+            }, 3000);
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click events
+            document.getElementById('loginBtn').addEventListener('click', googleSignIn);
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            
+            // Check initial auth state
+            if (auth.currentUser) {
+                currentUser = auth.currentUser;
+                showUserInfo(currentUser);
+            }
+            
+            // Smooth scrolling
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update active nav
+                    document.querySelectorAll('nav a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+            
+            // Update active nav on scroll
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const sections = document.querySelectorAll('section');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (scrollY >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
